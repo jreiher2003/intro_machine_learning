@@ -1,5 +1,5 @@
 ##Intro to Machine Learning 
 
-**tech stack **
+**tech stack**
 **conda**
 **vagrant ubuntu/trusty64**
