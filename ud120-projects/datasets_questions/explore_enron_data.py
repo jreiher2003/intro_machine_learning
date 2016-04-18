@@ -21,7 +21,7 @@ from pprint import pprint
 
 enron_data = cPickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
-# pprint(len(enron_data))
+pprint(len(enron_data))
 # pprint(len(enron_data["SKILLING JEFFREY K"].keys()))
 
 # peeps = enron_data.keys()
@@ -34,7 +34,7 @@ for k, v in enron_data.iteritems():
 # print poi
 print len(poi)
 
-# pprint(enron_data['LAY KENNETH L'])
+pprint(enron_data['LAY KENNETH L'])
 # pprint(enron_data['FASTOW ANDREW S'])
 # pprint(enron_data["SKILLING JEFFREY K"])
 		
@@ -54,3 +54,17 @@ for k, v in enron_data.iteritems():
         email.append(k)
 
 print len(email)
+
+tp = []
+for k, v in enron_data.iteritems():
+    if v['total_payments'] == 'NaN':
+        tp.append(k)
+        print v["total_payments"]
+print len(tp)
+
+tsv = []
+for k, v in enron_data.iteritems():
+    if v['total_stock_value'] == 'NaN':
+        tsv.append(k)
+        
+print len(tsv)
