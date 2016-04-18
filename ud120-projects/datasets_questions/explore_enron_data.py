@@ -21,25 +21,36 @@ from pprint import pprint
 
 enron_data = cPickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
-pprint(len(enron_data))
-pprint(len(enron_data["SKILLING JEFFREY K"].keys()))
-pprint(enron_data["SKILLING JEFFREY K"])
+# pprint(len(enron_data))
+# pprint(len(enron_data["SKILLING JEFFREY K"].keys()))
 
-peeps = enron_data.keys()
-
-poi = []		
+# peeps = enron_data.keys()
+# print peeps
+poi = []        
 for k, v in enron_data.iteritems():
-	if v['poi'] == 1:
-		poi.append(k)
-		# print k
+    if v['poi'] == 1:
+        poi.append(k)
+        # print k
 # print poi
 print len(poi)
 
-pprint(enron_data['PRENTICE JAMES'])
-pprint(enron_data["COLWELL WESLEY"])
+# pprint(enron_data['LAY KENNETH L'])
+# pprint(enron_data['FASTOW ANDREW S'])
+# pprint(enron_data["SKILLING JEFFREY K"])
 		
 		# print len(k)
 
 
+qs = []
+for k, v in enron_data.iteritems():
+    if v['salary'] != 'NaN':
+        qs.append(k)
 
+print len(qs)
 
+email = []
+for k, v in enron_data.iteritems():
+    if v['email_address'] != 'NaN':
+        email.append(k)
+
+print len(email)
