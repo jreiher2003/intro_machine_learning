@@ -1,8 +1,10 @@
 #!/usr/bin/python
-
+import matplotlib
+matplotlib.use('agg')
 import random
 import numpy
 import matplotlib.pyplot as plt
+# import cPickle
 import pickle
 
 from outlier_cleaner import outlierCleaner
@@ -26,7 +28,11 @@ ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages
 ### fill in a regression here!  Name the regression object reg so that
 ### the plotting code below works, and you can see what your regression looks like
 
+from sklearn.linear_model import LinearRegression
 
+reg = LinearRegression()
+
+reg.fit(ages_train, net_worths_train)
 
 
 
@@ -41,7 +47,7 @@ try:
 except NameError:
     pass
 plt.scatter(ages, net_worths)
-plt.show()
+plt.savefig("scatter.png")
 
 
 ### identify and remove the most outlier-y points
@@ -76,7 +82,7 @@ if len(cleaned_data) > 0:
     plt.scatter(ages, net_worths)
     plt.xlabel("ages")
     plt.ylabel("net worths")
-    plt.show()
+    plt.savefig("scatter2.png")
 
 
 else:
