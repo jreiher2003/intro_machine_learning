@@ -24,7 +24,8 @@ def outlierCleaner(predictions, ages, net_worths):
     cleaned_data = zip(ages, net_worth, errors)
     from operator import itemgetter
     cleaned_data = sorted(cleaned_data, key=itemgetter(2))
-    print cleaned_data
+    rmv = len(cleaned_data) * .1
+    cleaned_data = cleaned_data[:-rmv]
     
 
     
