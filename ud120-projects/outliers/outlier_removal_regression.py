@@ -34,12 +34,7 @@ reg = LinearRegression()
 
 reg.fit(ages_train, net_worths_train)
 
-
-
-
-
-
-
+print reg.coef_
 
 
 try:
@@ -48,21 +43,33 @@ except NameError:
     pass
 plt.scatter(ages, net_worths)
 plt.savefig("scatter.png")
+predictions = reg.predict(ages_test)
+# print predictions
+print reg.score(ages_test, net_worths_test)
 
 
-### identify and remove the most outlier-y points
+## identify and remove the most outlier-y points
 cleaned_data = []
-try:
-    predictions = reg.predict(ages_train)
-    cleaned_data = outlierCleaner( predictions, ages_train, net_worths_train )
-except NameError:
-    print "your regression object doesn't exist, or isn't name reg"
-    print "can't make predictions to use in identifying outliers"
+net_worth = net_worths_train
+ages = ages_train
+predictions = reg.predict(ages_train)
+import operator
+errors = map(operator.sub, net_worth, predictions)
+abs_errors = [abs(k) for k in errors]
 
+cleaned_data = zip(ages, net_worth, abs_errors)
+from operator import itemgetter
+cleaned_data = sorted(cleaned_data, key=itemgetter(2))
+rmv = int(len(cleaned_data) * .1)
+cleaned_data = cleaned_data[:-rmv]
 
-
-
-
+# try:
+#     # predictions = reg.predict(ages_train)
+    
+#     # cleaned_data = outlierCleaner( predictions, ages, net_worths )
+# except NameError:
+#     print "your regression object doesn't exist, or isn't name reg"
+#     print "can't make predictions to use in identifying outliers"
 
 
 ### only run this code if cleaned_data is returning data
@@ -74,7 +81,10 @@ if len(cleaned_data) > 0:
     ### refit your cleaned data!
     try:
         reg.fit(ages, net_worths)
-        plt.plot(ages, reg.predict(ages), color="blue")
+        print reg.coef_
+        plt.plot(ages, reg.predict(ages), color="red")
+        print reg.score(ages, net_worths)
+        print reg.score(ages_test, net_worths_test)
     except NameError:
         print "you don't seem to have regression imported/created,"
         print "   or else your regression object isn't named reg"
