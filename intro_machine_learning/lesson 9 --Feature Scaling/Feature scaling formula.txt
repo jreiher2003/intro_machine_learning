@@ -1,0 +1,6 @@
+Feature scaling formula
+x1 = (x - xmin) // xmax-xmin 
+weights = [115, 140, 175]
+x^140 = (140 - 115) // (175-115)
+>>> .417
+

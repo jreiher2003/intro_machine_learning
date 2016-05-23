@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 import sys
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
+from sklearn.preprocessing import MinMaxScaler
 
 
 
@@ -52,12 +53,38 @@ feature_1 = "salary"
 feature_2 = "exercised_stock_options"
 # feature_3 =  "total_payments"
 poi  = "poi"
+
+
 features_list = [poi, feature_1, feature_2]
 data = featureFormat(data_dict, features_list )
-
+# print data[0]
 poi, finance_features = targetFeatureSplit( data )
 # import operator
 # print max(item[0] for item in finance_features)
+
+### lesson 9 preprocessing 
+scaler = MinMaxScaler() 
+rescaled_salary = scaler.fit_transform(data)
+val = scaler.transform([0., 200000., 1000000.])
+print val
+
+### extra code not correct 
+# salary = [item[0] for item in finance_features if item[0] !=0]
+# exercised_stock_options = [item[1] for item in finance_features if item[1] !=0]
+# print exercised_stock_options
+# salary_list = zip(salary, rescaled_salary)
+# print salary_list
+# max_salary = max(salary)
+# min_salary = min(salary)
+# print min_salary
+# max_ex_st = max(exercised_stock_options)
+# min_ex_st = min(exercised_stock_options)
+# print min_ex_st
+# ex = (1000000 - min_salary) / (float(max_salary) - min_salary)
+# print ex  
+# # print max_salary, min_salary
+# y = (200000-min_salary) / (float(max_salary) - min_salary)
+# print y
 
 # print min(item[0] for item in finance_features if item[0] !=0)
 ### in the "clustering with 3 features" part of the mini-project,
