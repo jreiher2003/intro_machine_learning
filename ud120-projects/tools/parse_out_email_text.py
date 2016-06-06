@@ -1,6 +1,8 @@
-#!/usr/bin/python
-
+# !/usr/bin/python
+# import nltk
+# nltk.download() 
 from nltk.stem.snowball import SnowballStemmer
+from nltk.corpus import stopwords 
 import string
 
 def parseOutText(f):
@@ -28,17 +30,14 @@ def parseOutText(f):
         text_string = content[1].translate(string.maketrans("", ""), string.punctuation)
 
         ### project part 2: comment out the line below
-        words = text_string
-
+        stemmer = SnowballStemmer("english")
+        stem_word = " ".join([stemmer.stem(word) for word in text_string.split()])
         ### split the text string into individual words, stem each word,
         ### and append the stemmed word to words (make sure there's a single
         ### space between each stemmed word)
         
 
-
-
-
-    return words
+    return stem_word
 
     
 
